@@ -61,8 +61,17 @@ async function checkKyivstar() {
         }
 
         const normalizedNumber = TARGET_NUMBER.replace(/\D/g, "");
-        await page.locator("input").first().fill(normalizedNumber);
-        await page.keyboard.press("Enter");
+        await page.getByText("Який номер бажаєте").scrollIntoViewIfNeeded();
+
+        const searchInput = page
+            .locator("section, div")
+            .filter({ hasText: "Який номер бажаєте" })
+            .locator("input")
+            .first();
+
+        await searchInput.fill(normalizedNumber);
+
+        await page.getByRole("button", { name: /Підібрати номер/i }).click();
 
         await page.waitForTimeout(5000);
 
@@ -73,7 +82,7 @@ async function checkKyivstar() {
         const bodyText = await page.locator("body").innerText();
 
         if (bodyText.includes(TARGET_NUMBER)) {
-            await notify(`🎉 Kyivstar number is available: ${TARGET_NUMBER}`);
+            await notify(`Kyivstar number is available: ${TARGET_NUMBER}`);
         } else {
             await notify(`Number not found: ${TARGET_NUMBER}`);
         }

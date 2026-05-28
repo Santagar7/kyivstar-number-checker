@@ -2,14 +2,8 @@ name: Check Kyivstar number
 
 on:
   schedule:
-    # 07:00 UTC  -> 10:00 Kyiv (summer) / 09:00 Kyiv (winter)
-    - cron: "0 7 * * *"
-
-    # 13:00 UTC -> 16:00 Kyiv (summer) / 15:00 Kyiv (winter)
-    - cron: "0 13 * * *"
-
-    # 19:00 UTC -> 22:00 Kyiv (summer) / 21:00 Kyiv (winter)
-    - cron: "0 19 * * *"
+    # Every hour at minute 17 UTC
+    - cron: "17 * * * *"
 
   workflow_dispatch:
 

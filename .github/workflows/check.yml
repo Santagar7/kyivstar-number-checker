@@ -4,6 +4,7 @@ on:
   schedule:
     # Every hour at minute 17 UTC
     - cron: "17 * * * *"
+    - cron: "37 * * * *"
 
   workflow_dispatch:
 
